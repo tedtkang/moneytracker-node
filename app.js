@@ -6,7 +6,7 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
 var routes = require('./app/routes/index');
-//var users = require('./routes/users');
+var users = require('./app/routes/users');
 var transactions = require('./app/routes/transactions');
 
 var app = express();
@@ -25,11 +25,13 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', routes);
-//app.use('/users', users);
+app.use('/users', users);
 app.use('/transactions', transactions);
 
 
 var db = require('./config/database')(process.env.DATABASE_URL || 'mongodb://localhost/test');
+
+app.set('db', db);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

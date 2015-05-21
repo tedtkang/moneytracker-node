@@ -1,6 +1,8 @@
 var mongoose = require('mongoose');
+var moment = require('moment');
 
 var transactionSchema = mongoose.Schema({
+  uid: Number,
   amount: Number,
   date: Date,
   category: String,
@@ -8,8 +10,16 @@ var transactionSchema = mongoose.Schema({
   location: String
 })
 
-transactionSchema.methods.findWeeklyTransactions = function(date) {
+
+// Move this logic into the routes file.
+transactionSchema.statics.findWeeklyTransactions = function(date) {
+  var startWeek = moment(date).startOf('week');
+  var endWeek = moment(date).endOf('week');
+
+
   
+  return [startWeek, endWeek];
+
   
 
 };
