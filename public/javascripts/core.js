@@ -16,3 +16,6 @@ function mainController($scope, $http) {
         });
 
 }
+
+mainController.$inject = ['$scope', '$http'];
+angular.module('transactionsModule', []).controller('mainController', mainController);

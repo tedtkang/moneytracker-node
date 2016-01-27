@@ -1,6 +1,8 @@
 To do
 
-1)  Set up angular
+1)  Set up angular (DONE)
+2)  Set up bower to server angular and bootstrap.. Look into gulp
+3)  How to set up views directory and share code?
 1)  Flush out transaction and users model.  What to put in api routes and what to put in model?
 2)  Figure out how to do authentication scheme with login and stuff functions.
 3)  Figure out how to organize app.  How to pass database instance around?
