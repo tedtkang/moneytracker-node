@@ -5,7 +5,7 @@ function mainController($scope, $http) {
     $scope.formData = {};
 
     console.log('in main controller!!');
-    // when landing on the page, get all transactions and show them
+    // when landing on the page, get all transactions and save to scope
     $http.get('/transactions')
         .success(function(data) {
             $scope.transactions = data;
