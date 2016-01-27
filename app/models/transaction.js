@@ -16,11 +16,7 @@ transactionSchema.statics.findWeeklyTransactions = function(date) {
   var startWeek = moment(date).startOf('week');
   var endWeek = moment(date).endOf('week');
 
-
-  
   return [startWeek, endWeek];
-
-  
 
 };
 

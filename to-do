@@ -1,5 +1,6 @@
 To do
 
+1)  Set up angular
 1)  Flush out transaction and users model.  What to put in api routes and what to put in model?
 2)  Figure out how to do authentication scheme with login and stuff functions.
-3)  Figure out how to organize app.  How to pass database instance around?  
+3)  Figure out how to organize app.  How to pass database instance around?

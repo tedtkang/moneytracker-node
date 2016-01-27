@@ -8,24 +8,16 @@ var jsonParser = bodyParser.json()
 
 /* GET users listing. */
 router.get('/', function(req, res, next) {
-  /*
-  test = new Transaction();
-  test.amount = 53.43
-  test.date = new Date();
-  test.category = 'test category';
-  test.description = 'test description';
-  test.location = 'test location';
-  test.save();
-  console.log(test);
-  res.json(test);
-  */
+
   Transaction.find(function(err, transactions) {
     if (err) return res.send(err);
+    console.log(transactions);
+    console.log('here');
     res.json(transactions);
   });
 });
 
-router.post('/getweek', function(req, res, next) {
+router.get('/getweek', function(req, res, next) {
   //TODO: need to authenticate account first.
   date = req.body.date
   var format = "YYYY-MM-DD"
