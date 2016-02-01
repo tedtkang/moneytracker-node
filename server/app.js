@@ -9,12 +9,12 @@ var path = require('path');
 
 // Get the config object.
 var config = require('./config/environment/base');
+
 console.log('confg is ' + JSON.stringify(config));
-var routes = require('./app/routes/index');
-var users = require('./app/routes/users');
-var transactions = require('./app/routes/transactions');
 
 var app = express();
+
+app.set('appPath', path.join(config.root, 'client'));
 
 /**
  * View Engine setup
@@ -27,6 +27,7 @@ app.set('view engine', 'html');
 /**
  * Express settings
  */
+
 // uncomment after placing your favicon in /public
 //app.use(favicon(__dirname + '/public/favicon.ico'));
 app.use(logger('dev'));
@@ -34,14 +35,18 @@ app.use(logger('dev'));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(cookieParser());
-app.use(express.static(path.join(config.root, 'client/public')));
-console.log('bower path is ' + path.join(config.root, 'client/bower_components'));
-app.use('/bower_components',  express.static(path.join(config.root, 'client/bower_components')));
+app.use(express.static(path.join(app.get('appPath'), 'public')));
+console.log('bower path is ' + path.join(app.get('appPath'), 'bower_components'));
+app.use('/bower_components',  express.static(path.join(app.get('appPath'), 'bower_components')));
 
 /**
  * Setting up routes
- * TODO: Might want to put routes/models in resource files instead of separately
+ * TODO: Might want to oranize routes/models by resources rather than separately
+ * TODO: Make one consolidated routes file.
  */
+var routes = require('./app/routes/index');
+var users = require('./app/routes/users');
+var transactions = require('./app/routes/transactions');
 app.use('/', routes);
 app.use('/users', users);
 app.use('/transactions', transactions);
