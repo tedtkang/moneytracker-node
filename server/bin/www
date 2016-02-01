@@ -1,9 +1,14 @@
 #!/usr/bin/env node
 
+console.log("BIN/WWW CHECKING IN!!!!!");
+
+/**
+ * This file doesn't seem to do anything...
+ */
+
 /**
  * Module dependencies.
  */
-
 var app = require('../app');
 var debug = require('debug')('moneytracker-node:server');
 var http = require('http');

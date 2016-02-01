@@ -22,7 +22,7 @@ gulp.task('jshint', function() {
 
 gulp.task('start', function () {
   nodemon({
-    script: 'server.js'
+    script: 'server/server.js'
   , ext: 'js html'
   , env: { 'NODE_ENV': 'development' }
   })
@@ -33,7 +33,6 @@ gulp.task('default', ['jshint', 'start'], function() {
 });
 
 /*
-require('require-dir')('./gulp');
 console.log('Invoking gulp -',env);
 gulp.task('default', ['clean'], function (defaultTasks) {
   // run with paramater

@@ -32,7 +32,7 @@ router.get('/getweek', function(req, res, next) {
   });
 });
 
-router.post('/new', function(req, res, next) {
+router.post('/create', function(req, res, next) {
   //TODO: need to authenticate account first.
   console.log(req.params);
   newTrans = new Transaction();

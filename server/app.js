@@ -5,17 +5,28 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var methodOverride = require('method-override');
+var path = require('path');
 
+// Get the config object.
+var config = require('./config/environment/base');
+console.log('confg is ' + JSON.stringify(config));
 var routes = require('./app/routes/index');
 var users = require('./app/routes/users');
 var transactions = require('./app/routes/transactions');
 
 var app = express();
 
-// view engine setup
+/**
+ * View Engine setup
+ */
+app.set('views', path.join(__dirname, 'views'));
 app.engine('html', require('ejs').renderFile);
 app.set('view engine', 'html');
 
+
+/**
+ * Express settings
+ */
 // uncomment after placing your favicon in /public
 //app.use(favicon(__dirname + '/public/favicon.ico'));
 app.use(logger('dev'));
@@ -23,16 +34,29 @@ app.use(logger('dev'));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'public')));
-app.use('/bower_components',  express.static(__dirname + '/bower_components'));
+app.use(express.static(path.join(config.root, 'client/public')));
+console.log('bower path is ' + path.join(config.root, 'client/bower_components'));
+app.use('/bower_components',  express.static(path.join(config.root, 'client/bower_components')));
 
+/**
+ * Setting up routes
+ * TODO: Might want to put routes/models in resource files instead of separately
+ */
 app.use('/', routes);
 app.use('/users', users);
 app.use('/transactions', transactions);
 
-var db = require('./config/database')(process.env.DATABASE_URL || 'mongodb://localhost/test');
 
+/**
+ *  Set up the database
+ */
+
+console.log('process.env.database_url is: ' + process.env.DATABASE_URL);
+var db = require('./config/database')(config.mongo.uri, config.mongo.options);
 app.set('db', db);
+// Populate databases with sample data
+// TODO: Make seed file for testing
+//if (config.seedDB) { require('./config/seed'); }
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -42,6 +66,8 @@ app.use(function(req, res, next) {
 });
 
 // error handlers
+
+// Can do stuff for production and test here by checking app.get('env')
 
 // development error handler
 // will print stacktrace
