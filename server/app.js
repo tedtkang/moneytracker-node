@@ -48,8 +48,8 @@ var routes = require('./app/routes/index');
 var users = require('./app/routes/users');
 var transactions = require('./app/routes/transactions');
 app.use('/', routes);
-app.use('/users', users);
-app.use('/transactions', transactions);
+app.use('/api/users', users);
+app.use('/api/transactions', transactions);
 
 
 /**

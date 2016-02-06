@@ -6,7 +6,7 @@ function mainController($scope, $http) {
 
     console.log('in main controller!!');
     // when landing on the page, get all transactions and save to scope
-    $http.get('/transactions')
+    $http.get('/api/transactions')
         .success(function(data) {
             $scope.transactions = data;
             console.log(data);
